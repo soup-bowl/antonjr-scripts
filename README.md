@@ -15,10 +15,10 @@ Add `bash_additions` to `.bashrc`:
 This will add the scripts to path, and make them usable everywhere (on the controller).
 
 ## Scripts
-Command                     | Purpose
---------------------------- | -------
-`anton-app-homeassistant`   | Starts or updates the homeassistant container.
-`anton-install-docker`      | Installs Docker and docker-compose on the host.
-`anton-fix-firewall-docker` | Undoes the black magic Docker does to IPTABLES that kills Clusterhat.
-`anton-do-updates`          | Performs upgrades across the cluster.
-`anton-get-temps`           | Gets the temperature across the cluster.
+Command                     | Scope   | Purpose
+--------------------------- | ------- | -------
+`anton-app-homeassistant`   | Host    | Starts or updates the homeassistant container.
+`anton-install-docker`      | Host    | Installs Docker and docker-compose on the host.
+`anton-fix-firewall-docker` | Host    | Undoes the black magic Docker does to IPTABLES that kills Clusterhat.
+`anton-do-updates`          | Cluster | Performs upgrades across the cluster.
+`anton-get-temps`           | Cluster | Gets the temperature across the cluster.

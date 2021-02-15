@@ -11,7 +11,7 @@ elif [[ "$1" == "update" ]]; then
         docker pull homeassistant/raspberrypi3-homeassistant:stable
         docker stop homeassistant
         docker rm homeassistant
-        anton-haio start
+        anton-app-homeassistant start
 else
         echo "No argument - either 'start' or 'update' accepted."
 fi

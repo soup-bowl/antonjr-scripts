@@ -13,8 +13,11 @@ then
         sudo usermod -aG docker pi
         rm dockerscript
 
-        sudo curl -L --fail https://github.com/docker/compose/releases/download/1.28.2/run.sh -o /usr/local/bin/docker-compose
-        sudo chmod +x /usr/local/bin/docker-compose
+        # Ideal method, but doesn't currently work because of https://github.com/docker/compose/issues/6831.
+        #sudo curl -L --fail https://github.com/docker/compose/releases/download/1.28.2/run.sh -o /usr/local/bin/docker-compose
+        #sudo chmod +x /usr/local/bin/docker-compose
+        sudo apt-get install python3 python3-pip -y
+        python3 -m pip install -IU docker-compose
 else
         echo "Aborted.";
 fi

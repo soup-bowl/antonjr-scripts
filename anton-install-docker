@@ -1,0 +1,17 @@
+#!/bin/bash
+echo "Check the following is in your /boot/cmdline.txt, or the Docker install might fail."
+echo "cgroup_enable=memory cgroup_memory=1"
+
+read -p "Did you check, and wish to continue? [y/N] " -n 1 -r
+echo 
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+        dockerscript=/home/pi/scripts/docker.sh
+        rm dockerscript
+        curl -fsSL https://get.docker.com -o dockerscript
+        sh dockerscript
+        sudo usermod -aG docker pi
+        rm dockerscript
+else
+        echo "Aborted.";
+fi

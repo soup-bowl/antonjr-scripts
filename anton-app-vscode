@@ -1,0 +1,20 @@
+#! /bin/bash
+if [[ "$1" == "start" ]]; then
+	docker run --init -d \
+	--name vscode \
+	--restart=unless-stopped \
+	-v /home/pi/vscode/conf:/config \
+	-v /home/pi/vscode/app:/app \
+	-p 8443:8443 \
+	-e PUID=1000 \
+	-e PGID=1000 \
+	-e TZ=Europe/London \
+	ghcr.io/linuxserver/code-server
+elif [[ "$1" == "update" ]]; then
+	docker pull ghcr.io/linuxserver/code-server
+	docker stop vscode
+	docker rm vscode
+	anton-app-vscode start
+else
+	echo "No argument - either 'start' or 'update' accepted."
+fi

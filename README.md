@@ -18,6 +18,7 @@ This will add the scripts to path, and make them usable everywhere (on the contr
 Command                     | Scope   | Purpose
 --------------------------- | ------- | -------
 `anton-app-homeassistant`   | Host    | Starts or updates the homeassistant container.
+`anton-app-vscode`          | Host    | Starts or updates the vscode (using code-server) container.
 `anton-install-docker`      | Host    | Installs Docker and docker-compose on the host.
 `anton-fix-firewall-docker` | Host    | Undoes the black magic Docker does to IPTABLES that kills Clusterhat.
 `anton-do-updates`          | Cluster | Performs upgrades across the cluster.

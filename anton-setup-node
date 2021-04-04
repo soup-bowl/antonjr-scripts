@@ -1,0 +1,37 @@
+#! /bin/bash
+
+if [ -z "$1" ]; then
+     echo "Please provide a numeric argument between 1 and 4."
+     exit 1;
+fi
+
+imgurl="https://dist2.8086.net/clusterctrl/usbboot/buster/2020-12-02/2020-12-02-1-ClusterCTRL-armhf-lite-usbboot.tar.xz"
+imgpth="/tmp/usbboot.xz"
+oppath="/var/lib/clusterctrl/nfs/p$1/"
+if [ -d "$DIRECTORY" ]; then
+     echo "The cluster usbboot directory doesn't exist?"
+     echo "${oppath}"
+     exit 2;
+fi
+
+if [ ! -f "$imgpth" ]; then
+     echo "> Downloading USBBoot image..."
+     curl -o "$imgpth" "$imgurl"
+else
+     echo "> USBBoot image found in tmp."
+fi
+
+echo "> Unpacking USBBoot image into container $1."
+clusterctrl off p$1
+sudo rm -rf "$oppath"
+sudo mkdir "$oppath"
+sudo tar -axf "$imgpth" -C "$oppath"
+sudo usbboot-init $1
+
+echo "> Setting up SSH authentication."
+sudo touch "${oppath}boot/ssh"
+mkdir "${oppath}home/pi/.ssh"
+cp ".ssh/id_rsa.pub" "${oppath}home/pi/.ssh/authorized_keys"
+
+clusterctrl on p$1
+echo "Done."
